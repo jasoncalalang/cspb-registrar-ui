@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, it, expect, vi, afterEach } from 'vitest'
 import api from './api.js'
 
 const mockFetch = vi.fn(() => Promise.resolve({ json: () => Promise.resolve('ok') }))
@@ -14,14 +14,14 @@ describe('api service', () => {
     const controller = new AbortController()
     await api.listStudents(2, 10, controller.signal)
     expect(mockFetch).toHaveBeenCalledWith(
-      'http://localhost:8080/api/students?page=2&size=10',
+      '/api/students?page=2&size=10',
       { signal: controller.signal }
     )
   })
 
   it('createStudents posts to endpoint', async () => {
     await api.createStudents([{ firstName: 'a' }])
-    expect(mockFetch).toHaveBeenCalledWith('http://localhost:8080/api/students', {
+    expect(mockFetch).toHaveBeenCalledWith('/api/students', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify([{ firstName: 'a' }]),
@@ -32,7 +32,7 @@ describe('api service', () => {
   it('deleteStudent uses DELETE', async () => {
     await api.deleteStudent(1)
     expect(mockFetch).toHaveBeenCalledWith(
-      'http://localhost:8080/api/students/1',
+      '/api/students/1',
       { method: 'DELETE', signal: undefined }
     )
   })
@@ -40,7 +40,7 @@ describe('api service', () => {
   it('getStudent fetches by id', async () => {
     await api.getStudent(1)
     expect(mockFetch).toHaveBeenCalledWith(
-      'http://localhost:8080/api/students/1',
+      '/api/students/1',
       { signal: undefined }
     )
   })

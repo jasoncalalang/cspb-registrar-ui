@@ -1,4 +1,6 @@
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'
+// When running the dev server Vite proxies API requests to avoid CORS
+// problems. The base URL can be overridden via VITE_API_BASE_URL if needed.
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
 
 const listStudents = async (page = 0, size = 5, signal) => {
   const res = await fetch(

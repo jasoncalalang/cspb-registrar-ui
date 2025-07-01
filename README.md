@@ -14,3 +14,7 @@ yarn test
 ```
 
 The app displays a simple **Hello, world!** message using React.
+
+During development any calls to `/api` are automatically proxied to
+`http://localhost:8080` to avoid CORS issues. You can change the target
+server in `vite.config.js`.
