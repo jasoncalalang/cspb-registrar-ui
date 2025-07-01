@@ -1,6 +1,6 @@
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'
 
-const listStudents = async (page = 1, size = 5, signal) => {
+const listStudents = async (page = 0, size = 5, signal) => {
   const res = await fetch(
     `${BASE_URL}/api/students?page=${page}&size=${size}`,
     { signal }

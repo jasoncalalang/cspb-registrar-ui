@@ -40,7 +40,7 @@ describe('StudentList', () => {
       '/students/new'
     )
 
-    expect(apiMock.listStudents).toHaveBeenCalledWith(1, 5, expect.any(Object))
+    expect(apiMock.listStudents).toHaveBeenCalledWith(0, 5, expect.any(Object))
 
     expect(await screen.findByText('John')).toBeInTheDocument()
     expect(screen.getByText('A1')).toBeInTheDocument()
@@ -59,7 +59,7 @@ describe('StudentList', () => {
     apiMock.listStudents.mockResolvedValueOnce(mockStudents)
     fireEvent.click(screen.getAllByText('Next')[0])
 
-    expect(apiMock.listStudents).toHaveBeenCalledWith(2, 5, expect.any(Object))
+    expect(apiMock.listStudents).toHaveBeenCalledWith(1, 5, expect.any(Object))
   })
 
   it('deletes a student when delete button is clicked', async () => {

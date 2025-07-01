@@ -6,7 +6,7 @@ import api from '../services/api.js'
 
 function StudentList() {
   const [students, setStudents] = useState([])
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(0)
   const [toast, setToast] = useState('')
   const location = useLocation()
   const navigate = useNavigate()
@@ -42,7 +42,7 @@ function StudentList() {
   }
 
   const nextPage = () => setPage((p) => p + 1)
-  const prevPage = () => setPage((p) => Math.max(1, p - 1))
+  const prevPage = () => setPage((p) => Math.max(0, p - 1))
 
   return (
     <div>
@@ -94,7 +94,7 @@ function StudentList() {
         </tbody>
       </table>
       <div className="d-flex justify-content-between">
-        <button className="btn btn-secondary" onClick={prevPage} disabled={page === 1}>
+        <button className="btn btn-secondary" onClick={prevPage} disabled={page === 0}>
           Previous
         </button>
         <span>Page {page}</span>
