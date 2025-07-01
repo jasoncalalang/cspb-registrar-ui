@@ -16,7 +16,7 @@ function StudentList() {
     const controller = new AbortController()
     api
       .listStudents(page, pageSize, controller.signal)
-      .then((data) => setStudents(data))
+      .then((data) => setStudents(data.content ?? data))
       .catch(() => {})
     return () => controller.abort()
   }, [page])
