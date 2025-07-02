@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import api from '../services/api.js'
+const loadingGif = 'https://i.gifer.com/YCZH.gif'
 
 function StudentDetails() {
   const { id } = useParams()
@@ -15,7 +16,12 @@ function StudentDetails() {
     return () => controller.abort()
   }, [id])
 
-  if (!student) return <div>Loading...</div>
+  if (!student)
+    return (
+      <div className="text-center my-5">
+        <img src={loadingGif} alt="Loading..." />
+      </div>
+    )
 
   return (
     <div>

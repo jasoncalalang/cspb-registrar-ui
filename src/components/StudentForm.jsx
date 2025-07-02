@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import api from '../services/api.js'
+const loadingGif = 'https://i.gifer.com/YCZH.gif'
 
 const initialStudent = {
   id: undefined,
@@ -22,6 +23,7 @@ const initialStudent = {
 function StudentForm() {
   const [student, setStudent] = useState(initialStudent)
   const [status, setStatus] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   const handleChange = (e) => {
@@ -32,12 +34,14 @@ function StudentForm() {
   const handleSubmit = (e) => {
     e.preventDefault()
     setStatus('')
+    setLoading(true)
     api
       .createStudents([student])
       .then(() => {
         navigate('/', { state: { toast: 'student is created' } })
       })
       .catch(() => setStatus('Error'))
+      .finally(() => setLoading(false))
   }
 
   return (
@@ -186,7 +190,13 @@ function StudentForm() {
         />
       </div>
 
-      <button type="submit" className="btn btn-primary">Submit</button>
+      <button type="submit" className="btn btn-primary" disabled={loading}>
+        {loading ? (
+          <img src={loadingGif} alt="Loading..." width="20" />
+        ) : (
+          'Submit'
+        )}
+      </button>
       {status && <span className="ms-2">{status}</span>}
     </form>
   )
