@@ -1,28 +1,30 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import api from '../services/api.js'
-const loadingGif = 'https://i.gifer.com/YCZH.gif'
+"use client"
+
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import api from "../services/api.js"
+const loadingGif = "https://i.gifer.com/YCZH.gif"
 
 const initialStudent = {
   id: undefined,
-  lrn: '',
-  lastName: '',
-  firstName: '',
-  middleName: '',
-  extensionName: '',
-  birthDate: '',
-  birthPlace: '',
-  gender: '',
-  nationality: '',
-  religion: '',
+  lrn: "",
+  lastName: "",
+  firstName: "",
+  middleName: "",
+  extensionName: "",
+  birthDate: "",
+  birthPlace: "",
+  gender: "",
+  nationality: "",
+  religion: "",
   numSiblings: 0,
-  siblingNames: '',
-  imgPath: '',
+  siblingNames: "",
+  imgPath: "",
 }
 
 function StudentForm() {
   const [student, setStudent] = useState(initialStudent)
-  const [status, setStatus] = useState('')
+  const [status, setStatus] = useState("")
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
@@ -33,14 +35,14 @@ function StudentForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setStatus('')
+    setStatus("")
     setLoading(true)
     api
       .createStudents([student])
       .then(() => {
-        navigate('/', { state: { toast: 'student is created' } })
+        navigate("/", { state: { toast: "student is created" } })
       })
-      .catch(() => setStatus('Error'))
+      .catch(() => setStatus("Error"))
       .finally(() => setLoading(false))
   }
 
@@ -49,13 +51,7 @@ function StudentForm() {
       <h2>Create Student</h2>
 
       <div className="mb-3">
-        <input
-          name="lrn"
-          className="form-control"
-          placeholder="LRN"
-          value={student.lrn}
-          onChange={handleChange}
-        />
+        <input name="lrn" className="form-control" placeholder="LRN" value={student.lrn} onChange={handleChange} />
       </div>
 
       <div className="row mb-3">
@@ -126,12 +122,7 @@ function StudentForm() {
 
       <div className="row mb-3">
         <div className="col">
-          <select
-            name="gender"
-            className="form-select"
-            value={student.gender}
-            onChange={handleChange}
-          >
+          <select name="gender" className="form-select" value={student.gender} onChange={handleChange}>
             <option value="">Select Gender</option>
             <option value="M">Male</option>
             <option value="F">Female</option>
@@ -190,12 +181,8 @@ function StudentForm() {
         />
       </div>
 
-      <button type="submit" className="btn btn-primary" disabled={loading}>
-        {loading ? (
-          <img src={loadingGif} alt="Loading..." width="20" />
-        ) : (
-          'Submit'
-        )}
+      <button type="submit" className="btn text-white" disabled={loading} style={{ backgroundColor: "#2F5249" }}>
+        {loading ? <img src={loadingGif || "/placeholder.svg"} alt="Loading..." width="20" /> : "Submit"}
       </button>
       {status && <span className="ms-2">{status}</span>}
     </form>

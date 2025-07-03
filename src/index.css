@@ -3,6 +3,12 @@
   line-height: 1.5;
   font-weight: 400;
 
+  /* Custom color theme */
+  --primary-dark: #2f5249;
+  --primary-light: #e3de61;
+  --text-on-dark: white;
+  --text-on-light: black;
+
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
@@ -15,11 +21,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--primary-dark);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #1a3530;
 }
 
 body {
@@ -42,16 +48,96 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--primary-dark);
+  color: var(--text-on-dark);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--primary-light);
+  background-color: #1a3530;
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto var(--primary-light);
+}
+
+/* Custom theme classes */
+.bg-theme-dark {
+  background-color: var(--primary-dark) !important;
+  color: var(--text-on-dark) !important;
+}
+
+.bg-theme-light {
+  background-color: var(--primary-light) !important;
+  color: var(--text-on-light) !important;
+}
+
+.text-theme-dark {
+  color: var(--primary-dark) !important;
+}
+
+.text-theme-light {
+  color: var(--primary-light) !important;
+}
+
+.btn-theme-primary {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  color: var(--text-on-dark);
+}
+
+.btn-theme-primary:hover {
+  background-color: #1a3530;
+  border-color: #1a3530;
+  color: var(--text-on-dark);
+}
+
+.btn-theme-secondary {
+  background-color: var(--primary-light);
+  border-color: var(--primary-light);
+  color: var(--text-on-light);
+}
+
+.btn-theme-secondary:hover {
+  background-color: #d4cf4a;
+  border-color: #d4cf4a;
+  color: var(--text-on-light);
+}
+
+/* Remove old pink class */
+.bg-pink {
+  background-color: var(--primary-light) !important;
+  color: var(--text-on-light) !important;
+}
+
+.min-vh-100 {
+  min-height: 100vh;
+}
+
+/* Sidebar responsive behavior */
+@media (max-width: 991.98px) {
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(47, 82, 73, 0.5);
+    z-index: 1040;
+  }
+}
+
+/* Mobile card improvements */
+@media (max-width: 767.98px) {
+  .card-body {
+    padding: 1rem 0.75rem;
+  }
+
+  .btn-group-vertical .btn {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -60,9 +146,10 @@ button:focus-visible {
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: #1a3530;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: var(--primary-dark);
+    color: var(--text-on-dark);
   }
 }

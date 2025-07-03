@@ -1,13 +1,14 @@
-import { BrowserRouter as Router } from 'react-router-dom'
-import AppRoutes from './routes.jsx'
-import './App.css'
+import { BrowserRouter as Router } from "react-router-dom"
+import Layout from "./components/Layout.jsx"
+import AppRoutes from "./routes.jsx"
+import "./App.css"
 
 function App() {
   return (
     <Router>
-      <div className="container mt-5">
+      <Layout>
         <AppRoutes />
-      </div>
+      </Layout>
     </Router>
   )
 }
