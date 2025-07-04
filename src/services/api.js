@@ -29,9 +29,15 @@ const getStudent = async (id, signal) => {
   return res.json()
 }
 
+const getStudentAddress = async (id, signal) => {
+  const res = await fetch(`${BASE_URL}/api/students/${id}/address`, { signal })
+  return res.json()
+}
+
 export default {
   listStudents,
   createStudents,
   deleteStudent,
   getStudent,
+  getStudentAddress,
 }

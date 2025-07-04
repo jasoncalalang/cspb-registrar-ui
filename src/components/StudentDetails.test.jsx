@@ -8,6 +8,7 @@ import StudentDetails from './StudentDetails.jsx'
 vi.mock('../services/api.js', () => ({
   default: {
     getStudent: vi.fn(),
+    getStudentAddress: vi.fn(),
   },
 }))
 const { default: apiMock } = await import('../services/api.js')
@@ -37,6 +38,11 @@ describe('StudentDetails', () => {
       createdAt: '2025-07-01T01:43:27.671836Z',
       updatedAt: '2025-07-01T01:43:27.671836Z',
     })
+    apiMock.getStudentAddress.mockResolvedValue({
+      houseNo: '12A',
+      streetSubd: 'Sesame St',
+      bgyCode: 'B001',
+    })
 
     render(
       <MemoryRouter initialEntries={['/students/1']}>
@@ -47,6 +53,7 @@ describe('StudentDetails', () => {
     )
 
     expect(apiMock.getStudent).toHaveBeenCalledWith('1', expect.any(Object))
+    expect(apiMock.getStudentAddress).toHaveBeenCalledWith('1', expect.any(Object))
     expect(await screen.findByText('First Name: Juan')).toBeInTheDocument()
     expect(screen.getByText('Last Name: Dela Cruz')).toBeInTheDocument()
     expect(screen.getByText('Middle Name: Santos')).toBeInTheDocument()
@@ -61,5 +68,6 @@ describe('StudentDetails', () => {
     )
     const dateRegex = new RegExp(created.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
     expect(screen.getAllByText(dateRegex)).toHaveLength(2)
+    expect(screen.getByText('House No: 12A')).toBeInTheDocument()
   })
 })

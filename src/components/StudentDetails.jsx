@@ -6,6 +6,7 @@ const loadingGif = 'https://i.gifer.com/YCZH.gif'
 function StudentDetails() {
   const { id } = useParams()
   const [student, setStudent] = useState(null)
+  const [address, setAddress] = useState(null)
 
   useEffect(() => {
     const controller = new AbortController()
@@ -13,10 +14,14 @@ function StudentDetails() {
       .getStudent(id, controller.signal)
       .then((data) => setStudent(data))
       .catch(() => {})
+    api
+      .getStudentAddress(id, controller.signal)
+      .then((data) => setAddress(data))
+      .catch(() => {})
     return () => controller.abort()
   }, [id])
 
-  if (!student)
+  if (!student || !address)
     return (
       <div className="text-center my-5">
         <img src={loadingGif} alt="Loading..." />
@@ -40,6 +45,14 @@ function StudentDetails() {
       <p>Religion: {student.religion}</p>
       <p>Number of Siblings: {student.numSiblings}</p>
       <p>Sibling Names: {student.siblingNames}</p>
+      {address && (
+        <div>
+          <p>Address:</p>
+          <p>House No: {address.houseNo}</p>
+          <p>Street/Subd: {address.streetSubd}</p>
+          <p>Barangay Code: {address.bgyCode}</p>
+        </div>
+      )}
       <p>Created At: {new Date(student.createdAt).toLocaleString('en-PH', {
         timeZone: 'Asia/Manila',
       })}</p>

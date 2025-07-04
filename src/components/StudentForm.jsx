@@ -20,6 +20,11 @@ const initialStudent = {
   numSiblings: 0,
   siblingNames: "",
   imgPath: "",
+  address: {
+    houseNo: "",
+    streetSubd: "",
+    bgyCode: "",
+  },
 }
 
 function StudentForm() {
@@ -31,6 +36,14 @@ function StudentForm() {
   const handleChange = (e) => {
     const { name, value } = e.target
     setStudent((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleAddressChange = (e) => {
+    const { name, value } = e.target
+    setStudent((prev) => ({
+      ...prev,
+      address: { ...prev.address, [name]: value },
+    }))
   }
 
   const handleSubmit = (e) => {
@@ -168,6 +181,38 @@ function StudentForm() {
           placeholder="Sibling Names"
           value={student.siblingNames}
           onChange={handleChange}
+        />
+      </div>
+
+      <h5>Address</h5>
+      <div className="row mb-3">
+        <div className="col">
+          <input
+            name="houseNo"
+            className="form-control"
+            placeholder="House No"
+            value={student.address.houseNo}
+            onChange={handleAddressChange}
+          />
+        </div>
+        <div className="col">
+          <input
+            name="streetSubd"
+            className="form-control"
+            placeholder="Street/Subdivision"
+            value={student.address.streetSubd}
+            onChange={handleAddressChange}
+          />
+        </div>
+      </div>
+
+      <div className="mb-3">
+        <input
+          name="bgyCode"
+          className="form-control"
+          placeholder="Barangay Code"
+          value={student.address.bgyCode}
+          onChange={handleAddressChange}
         />
       </div>
 

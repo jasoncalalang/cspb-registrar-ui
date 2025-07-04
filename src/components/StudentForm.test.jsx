@@ -65,6 +65,15 @@ describe('StudentForm', () => {
     fireEvent.change(screen.getByPlaceholderText('Sibling Names'), {
       target: { value: 'Maria Dela Cruz, Jose Dela Cruz' },
     })
+    fireEvent.change(screen.getByPlaceholderText('House No'), {
+      target: { value: '12A' },
+    })
+    fireEvent.change(screen.getByPlaceholderText('Street/Subdivision'), {
+      target: { value: 'Sesame St' },
+    })
+    fireEvent.change(screen.getByPlaceholderText('Barangay Code'), {
+      target: { value: 'B001' },
+    })
     fireEvent.change(screen.getByPlaceholderText('Image URL'), {
       target: { value: 'https://example.com/img.jpg' },
     })
@@ -85,6 +94,11 @@ describe('StudentForm', () => {
         religion: 'Catholic',
         numSiblings: '2',
         siblingNames: 'Maria Dela Cruz, Jose Dela Cruz',
+        address: {
+          houseNo: '12A',
+          streetSubd: 'Sesame St',
+          bgyCode: 'B001',
+        },
         imgPath: 'https://example.com/img.jpg',
       }),
     ])

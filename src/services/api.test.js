@@ -44,4 +44,12 @@ describe('api service', () => {
       { signal: undefined }
     )
   })
+
+  it('getStudentAddress fetches by id', async () => {
+    await api.getStudentAddress(1)
+    expect(mockFetch).toHaveBeenCalledWith(
+      '/api/students/1/address',
+      { signal: undefined }
+    )
+  })
 })

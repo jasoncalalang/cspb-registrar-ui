@@ -5,8 +5,8 @@ import '@testing-library/jest-dom/vitest'
 import { MemoryRouter } from 'react-router-dom'
 import AppRoutes from './routes.jsx'
 
-vi.mock('./components/StudentList.jsx', () => ({
-  default: () => <div>list page</div>,
+vi.mock('./components/Dashboard.jsx', () => ({
+  default: () => <div>dashboard page</div>,
 }))
 vi.mock('./components/StudentForm.jsx', () => ({
   default: () => <div>form page</div>,
@@ -16,13 +16,13 @@ vi.mock('./components/StudentDetails.jsx', () => ({
 }))
 
 describe('AppRoutes', () => {
-  it('renders list on root path', () => {
+  it('renders dashboard on root path', () => {
     render(
       <MemoryRouter initialEntries={['/']}>
         <AppRoutes />
       </MemoryRouter>
     )
-    expect(screen.getByText('list page')).toBeInTheDocument()
+    expect(screen.getByText('dashboard page')).toBeInTheDocument()
   })
 
   it('renders form on /students/new', () => {
