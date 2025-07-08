@@ -1,0 +1,67 @@
+{
+  "consumer": {
+    "name": "cspb-registrar-ui"
+  },
+  "interactions": [
+    {
+      "description": "a request for students",
+      "providerStates": [
+        {
+          "name": "students exist"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/api/students",
+        "query": {
+          "page": [
+            "1"
+          ],
+          "size": [
+            "5"
+          ]
+        }
+      },
+      "response": {
+        "body": [
+          {
+            "id": 1
+          }
+        ],
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          },
+          "header": {},
+          "status": {}
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pact-js": {
+      "version": "15.0.1"
+    },
+    "pactRust": {
+      "ffi": "0.4.22",
+      "models": "1.2.3"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "cspb-registrar-api"
+  }
+}

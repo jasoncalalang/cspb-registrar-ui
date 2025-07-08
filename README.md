@@ -13,6 +13,16 @@ To execute the test suite:
 yarn test
 ```
 
+To generate the Pact contract used by the backend tests execute the Pact
+contract suite:
+
+```bash
+yarn contract
+```
+
+This will create a Pact file under the `pacts/` directory describing the HTTP
+interactions exercised by the contract tests.
+
 The app displays a simple **Hello, world!** message using React.
 
 During development any calls to `/api` are automatically proxied to
