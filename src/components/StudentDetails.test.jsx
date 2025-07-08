@@ -62,10 +62,6 @@ describe('StudentDetails', () => {
       'en-PH',
       { timeZone: 'Asia/Manila' }
     )
-    const updated = new Date('2025-07-01T01:43:27.671836Z').toLocaleString(
-      'en-PH',
-      { timeZone: 'Asia/Manila' }
-    )
     const dateRegex = new RegExp(created.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
     expect(screen.getAllByText(dateRegex)).toHaveLength(2)
     expect(screen.getByText('House No: 12A')).toBeInTheDocument()
